@@ -23,23 +23,27 @@ namespace Core.Scripts.Localizations.Unity.Base
         private void Awake()
         {
             _localizationData = LocalizationController.GetLocalization(_localizationCode);
-            _currentLanguageCode = LocalizationController.GetCurrentLanguage();
-            LocalizationController.OnLanguageSwitch += delegate(Language language)
-            {
-                _currentLanguageCode = language.LanguageCode;
-                OnSwitchLanguage?.Invoke(GetLocalization());
-            };
+            
+            LocalizationController.OnLanguageSwitch += HandleOnLanguageSwitch;
+            
+            HandleOnLanguageSwitch(LocalizationController.GetCurrentLanguage());
         }
 
         #endregion
 
+        private void HandleOnLanguageSwitch(Language language)
+        {
+            _currentLanguageCode = language;
+            OnSwitchLanguage?.Invoke(GetLocalization());
+        }
+        
         /// <summary>
         /// Get localization, by localization code, which is stored in LocalizationInfo.
         /// </summary>
         /// <returns>Localization for the current language.</returns>
         public string GetLocalization()
         {
-            if (_localizationData == null || _localizationData?.Data.Count == 0)
+            if (_localizationData == null || _localizationData.Data.Count == 0)
             {
                 return "localization is null";
             }
