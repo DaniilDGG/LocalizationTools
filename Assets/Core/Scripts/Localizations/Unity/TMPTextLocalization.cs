@@ -20,6 +20,7 @@ namespace Core.Scripts.Localizations.Unity
 
         private void Awake()
         {
+            _localizationInfo = gameObject.GetComponent<LocalizationInfo>();
             _localizationInfo.OnSwitchLanguage += delegate(string text) { _tmpText.text = text; };
             _tmpText.text = _localizationInfo.GetLocalization();
         }
