@@ -1,0 +1,74 @@
+//Copyright 2023 Daniil Glagolev
+//Licensed under the Apache License, Version 2.0
+
+using System.Collections.Generic;
+using System.IO;
+using Core.Scripts.File_Stream;
+using UnityEngine;
+
+namespace Core.Scripts.Localizations.Config
+{
+    [CreateAssetMenu(fileName = "Localization Profile", menuName = "Localization/LocalizationProfile", order = 1)]
+    public class LocalizationProfile : ScriptableObject
+    {
+        #region Fields
+
+        [SerializeField] private string _localizationFile = "localization.loc";
+        private Localization _localization = new();
+
+        #region Propeties
+
+        private string MainPath { get; } = Application.streamingAssetsPath;
+        public string LocalizationFile => _localizationFile;
+        public LocalizationData[] LocalizationDates => _localization.Localizations;
+
+        #endregion
+
+        #endregion
+
+        /// <summary>
+        /// Initialization of the localization system, is the entry point.
+        /// </summary>
+        public void InitLocalizationSystem()
+        {
+            Load();
+            LocalizationController.InitLocalization(_localization.Languages, _localization.Localizations);
+        }
+
+        /// <summary>
+        /// Set localization changes and save.
+        /// </summary>
+        /// <param name="localizationCode">localization code, is a unique localization identifier.</param>
+        /// <param name="languageData">data for localization.</param>
+        public void SetLocalization(string localizationCode, LanguageData[] languageData)
+        {
+            _localization.SetLocalization(localizationCode, new List<LanguageData>(languageData));
+            Save();
+        }
+
+        /// <summary>
+        /// Set language changes and save.
+        /// </summary>
+        /// <param name="languages">New languages.</param>
+        public void SetLanguages(List<Language> languages)
+        {
+            _localization.SetLocalization(languages.ToArray());
+            Save();
+        }
+
+        private void Load()
+        {
+            var path = Path.Combine(MainPath, _localizationFile);
+
+            if (!File.Exists(path)) return;
+            
+            var json = File.ReadAllText(path);
+            _localization = JsonUtility.FromJson<Localization>(json);
+        }
+
+        private void Save()
+        {
+            FileEditor.Write(_localizationFile, JsonUtility.ToJson(_localization, true), MainPath);
+        }
+    }
+}
