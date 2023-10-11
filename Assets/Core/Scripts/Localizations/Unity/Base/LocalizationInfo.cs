@@ -11,10 +11,19 @@ namespace Core.Scripts.Localizations.Unity.Base
         #region Fields
 
         [SerializeField] private string _localizationCode;
-
+        
         private LocalizationData _localizationData;
         private string _currentLanguageCode;
+
+        private const string CustomCode = "customCode";
+        
         public event UnityAction<string> OnSwitchLanguage;
+
+        #region Propeties
+
+        public string LocalizationCode => _localizationCode;
+
+        #endregion
 
         #endregion
 
@@ -22,7 +31,10 @@ namespace Core.Scripts.Localizations.Unity.Base
 
         private void Awake()
         {
-            _localizationData = LocalizationController.GetLocalization(_localizationCode);
+            if (_localizationCode != CustomCode)
+            {
+                _localizationData = LocalizationController.GetLocalization(_localizationCode);
+            }
             
             LocalizationController.OnLanguageSwitch += HandleOnLanguageSwitch;
             
@@ -49,6 +61,20 @@ namespace Core.Scripts.Localizations.Unity.Base
             }
             
             return _localizationData.Data.Find(data => data.Language.LanguageCode == _currentLanguageCode).Localization;
+        }
+
+        public void SetLocalization(string localizationCode)
+        {
+            _localizationCode = localizationCode;
+            _localizationData = LocalizationController.GetLocalization(_localizationCode);
+            OnSwitchLanguage?.Invoke(GetLocalization());
+        }
+
+        public void SetLocalization(LocalizationData localizationData)
+        {
+            _localizationCode = CustomCode;
+            _localizationData = localizationData;
+            OnSwitchLanguage?.Invoke(GetLocalization());
         }
     }
 }

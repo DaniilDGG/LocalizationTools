@@ -29,13 +29,23 @@ namespace Core.Scripts.Localizations.Editor
         }
 
         [MenuItem("Localization/Localization settings")]
-        private static void LocalizationSetting()
+        private static void HandleLocalizationSetting() => LocalizationSetting();
+
+        private static LocalizationWindow LocalizationSetting()
         {
             Init();
-            LocalizationWindow.ShowWindow().OnSaveLocalization += _localizationProfile.SetLocalization;
+            var localizationWindow = LocalizationWindow.ShowWindow();
+            localizationWindow.OnSaveLocalization += _localizationProfile.SetLocalization;
+            return localizationWindow;
         }
 
-        private static void Init()
+        public static void OpenLocalizationSetting(string code)
+        {
+            var localizationWindow = LocalizationSetting();
+            localizationWindow.OpenCodeWindow(code);
+        }
+
+        public static void Init()
         {
             if (!_localizationProfile)
             {

@@ -13,7 +13,7 @@ namespace Core.Scripts.Localizations
         #region Fields
 
         [SerializeField] private List<LocalizationData> _localizations = new();
-        [SerializeField] private Language[] _languages;
+        [SerializeField] private Language[] _languages = {new("en", "english")};
 
         #region Propeties
 
@@ -40,6 +40,17 @@ namespace Core.Scripts.Localizations
             }
 
             _localizations[index] = new LocalizationData(localizationCode, languageData);
+        }
+        
+        /// <summary>
+        /// Set localizations changes and save.
+        /// </summary>
+        /// <param name="localizationDates">New localizations.</param>
+        public void SetLocalization(List<LocalizationData> localizationDates)
+        {
+            _localizations = localizationDates;
+            
+            FixLocalizations();
         }
 
         /// <summary>

@@ -35,11 +35,12 @@ namespace Core.Scripts.Editor
 
         protected TextField CreateTextInput(string text, string label) => CreateTextInput(text, label, Root);
         
-        protected TextField CreateTextInput(string text, string label, VisualElement visualElement)
+        protected TextField CreateTextInput(string text, string label, VisualElement visualElement, bool multiline = false)
         {
-            var textElement = new TextField(label, 30, false, false, ' ')
+            var textElement = new TextField(label, int.MaxValue, false, false, ' ')
             {
-                value = text
+                value = text,
+                multiline = multiline,
             };
 
             visualElement.Add(textElement);

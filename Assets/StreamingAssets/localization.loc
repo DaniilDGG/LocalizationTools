@@ -1,0 +1,96 @@
+{
+    "_localizations": [
+        {
+            "_localizationCode": "Demo_1",
+            "_data": [
+                {
+                    "_language": {
+                        "_languageCode": "en",
+                        "_languageName": "english"
+                    },
+                    "_localization": "Hi!"
+                },
+                {
+                    "_language": {
+                        "_languageCode": "ru",
+                        "_languageName": "русский"
+                    },
+                    "_localization": "Привет!"
+                },
+                {
+                    "_language": {
+                        "_languageCode": "uk",
+                        "_languageName": "український"
+                    },
+                    "_localization": "Привіт!"
+                }
+            ]
+        },
+        {
+            "_localizationCode": "Demo_2",
+            "_data": [
+                {
+                    "_language": {
+                        "_languageCode": "en",
+                        "_languageName": "english"
+                    },
+                    "_localization": "It's a test scene!"
+                },
+                {
+                    "_language": {
+                        "_languageCode": "ru",
+                        "_languageName": "русский"
+                    },
+                    "_localization": "Это тестовая сцена!"
+                },
+                {
+                    "_language": {
+                        "_languageCode": "uk",
+                        "_languageName": "український"
+                    },
+                    "_localization": "Це тестова сцена!"
+                }
+            ]
+        },
+        {
+            "_localizationCode": "Demo_3",
+            "_data": [
+                {
+                    "_language": {
+                        "_languageCode": "en",
+                        "_languageName": "english"
+                    },
+                    "_localization": "What else did you expect?"
+                },
+                {
+                    "_language": {
+                        "_languageCode": "ru",
+                        "_languageName": "русский"
+                    },
+                    "_localization": "Чего вы ещё тут ожидали?"
+                },
+                {
+                    "_language": {
+                        "_languageCode": "uk",
+                        "_languageName": "український"
+                    },
+                    "_localization": "Чого ви ще тут очікували?"
+                }
+            ]
+        }
+    ],
+    "_languages": [
+        {
+            "_languageCode": "en",
+            "_languageName": "english"
+        },
+        {
+            "_languageCode": "ru",
+            "_languageName": "русский"
+        },
+        {
+            "_languageCode": "uk",
+            "_languageName": "український"
+        }
+    ]
+}

@@ -15,7 +15,7 @@ namespace Core.Scripts.File_Stream
         public static void Write(string name, string text, Action<Exception> onError = null)
         {
             CheckDirectory(onError);
-            Write(PersistentDataPath, name, text, onError);
+            Write(name, text, PersistentDataPath, onError);
         }
 
         public static async void Write(string name, string text, string path, Action<Exception> onError = null)
@@ -43,7 +43,7 @@ namespace Core.Scripts.File_Stream
         public static string Read(string name, string path, Action<Exception> onError = null)
         {
             CheckDirectory(onError);
-            if (!File.Exists(Path.Combine(name, path)))
+            if (!File.Exists(Path.Combine(path, name)))
             {
                 onError?.Invoke(new Exception("File not exists. Logic aborted..."));
                 return "";

@@ -1,6 +1,7 @@
 //Copyright 2023 Daniil Glagolev
 //Licensed under the Apache License, Version 2.0
 
+using System;
 using Core.Scripts.Localizations.Unity.Base;
 using TMPro;
 using UnityEngine;
@@ -18,11 +19,25 @@ namespace Core.Scripts.Localizations.Unity
 
         #endregion
 
+        #region MonoBehavior
+
         private void Awake()
         {
             _localizationInfo = gameObject.GetComponent<LocalizationInfo>();
             _localizationInfo.OnSwitchLanguage += delegate(string text) { _tmpText.text = text; };
             _tmpText.text = _localizationInfo.GetLocalization();
         }
+
+        private void OnValidate()
+        {
+            if (_tmpText)
+            {
+                return;
+            }
+            
+            _tmpText = gameObject.GetComponent<TMP_Text>();
+        }
+
+        #endregion
     }
 }

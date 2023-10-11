@@ -49,7 +49,7 @@ namespace Core.Scripts.Localizations.Editor
             };
             returnButton.clicked += Return;
             _visualElementLocalizations.Add(returnButton);
-            
+
             var continueButton = new Button
             {
                 text = "continue"
@@ -61,7 +61,7 @@ namespace Core.Scripts.Localizations.Editor
 
             for (var index = 0; index < LocalizationController.Languages.Length; index++)
             {
-                _localizationFields.Add(CreateTextInput("", LocalizationController.Languages[index].LanguageCode, _visualElementLocalizations));
+                _localizationFields.Add(CreateTextInput("", LocalizationController.Languages[index].LanguageCode, _visualElementLocalizations, true));
             }
             
             Root.Add(_visualElementCode);
@@ -91,6 +91,11 @@ namespace Core.Scripts.Localizations.Editor
         private void Continue()
         {
             _code = _codeField.value;
+            OpenCodeWindow();
+        }
+
+        private void OpenCodeWindow()
+        {
             Root.Remove(_visualElementCode);
             Root.Add(_visualElementLocalizations);
 
@@ -111,6 +116,12 @@ namespace Core.Scripts.Localizations.Editor
                 _localizationFields[index].value = localizationData.Data[index].Localization;
                 _localizationFields[index].label = localizationData.Data[index].Language.LanguageCode;
             }
+        }
+
+        public void OpenCodeWindow(string code)
+        {
+            _code = code;
+            OpenCodeWindow();
         }
     }
 }

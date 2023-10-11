@@ -32,7 +32,7 @@ namespace Core.Scripts.Localizations.Config
         public void InitLocalizationSystem()
         {
             Load();
-            LocalizationController.InitLocalization(_localization.Languages, _localization.Localizations);
+            ReloadLocalizationController();
         }
 
         /// <summary>
@@ -43,7 +43,13 @@ namespace Core.Scripts.Localizations.Config
         public void SetLocalization(string localizationCode, LanguageData[] languageData)
         {
             _localization.SetLocalization(localizationCode, new List<LanguageData>(languageData));
-            Save();
+            HandleSet();
+        }
+
+        public void SetLocalizations(List<LocalizationData> localizationDates)
+        {
+            _localization.SetLocalization(localizationDates);
+            HandleSet();
         }
 
         /// <summary>
@@ -53,7 +59,18 @@ namespace Core.Scripts.Localizations.Config
         public void SetLanguages(List<Language> languages)
         {
             _localization.SetLocalization(languages.ToArray());
+            HandleSet();
+        }
+
+        private void HandleSet()
+        {
             Save();
+            ReloadLocalizationController();
+        }
+
+        private void ReloadLocalizationController()
+        {
+            LocalizationController.InitLocalization(_localization.Languages, _localization.Localizations);
         }
 
         private void Load()

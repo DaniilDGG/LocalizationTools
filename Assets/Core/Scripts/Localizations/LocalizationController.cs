@@ -11,7 +11,7 @@ namespace Core.Scripts.Localizations
     {
         #region Fields
 
-        private static Language[] _languages = {new Language("en", "english")};
+        private static Language[] _languages = {new("en", "english")};
         private static LocalizationData[] _localizations;
 
         private static Language _currentLanguage;
@@ -56,6 +56,18 @@ namespace Core.Scripts.Localizations
             }
 
             return null;
+        }
+        
+        /// <summary>
+        /// Obtain localization when a localization code is available.
+        /// </summary>
+        /// <param name="localizationCode">localization code, is a unique localization identifier.</param>
+        /// <returns>data for localization.</returns>
+        public static LanguageData GetCurrentLocalization(string localizationCode)
+        {
+            var localization = GetLocalization(localizationCode);
+
+            return localization == null ? new LanguageData() : localization.Data.Find(data => GetCurrentLanguage().LanguageCode == data.Language);
         }
 
         public static void SwitchLanguage(int index)
