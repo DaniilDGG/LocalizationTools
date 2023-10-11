@@ -3,7 +3,7 @@
 
 This is a localization tool created for the Unity engine.
 
-#How to use
+# How to use
 
 To get started with this localization tool, you must set up the languages using the Localization/Language settings window.
 Next, add the localizations you need using the Localization/Localization Settings window, where you will need to first come up with a unique identifier for the localization item, and then set localizations for all the selected languages.
