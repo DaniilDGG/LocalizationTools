@@ -109,35 +109,34 @@ namespace Core.Scripts.Localizations
         
         public static LocalizationData operator +(LocalizationData a, LocalizationData b)
         {
-            var localizationData = a;
+            var localizations = new List<LanguageData>();
             
-            for (var index = 0; index < localizationData._data.Count; index++)
+            for (var index = 0; index < a._data.Count; index++)
             {
-                var languageData = localizationData._data[index];
+                var languageData = a._data[index];
                 
-                languageData += b._data.Find(data =>
-                    data.Language.LanguageCode == languageData.Language.LanguageCode);
+                languageData += b._data.Find(data => data.Language.LanguageCode == languageData.Language.LanguageCode);
 
-                localizationData._data[index] = languageData;
+                localizations.Add(languageData);
             }
 
-            return localizationData;
+            return new LocalizationData(a._localizationCode, localizations);
         }
         
         public static LocalizationData operator +(LocalizationData a, string b)
         {
-            var localizationData = a;
+            var localizations = new List<LanguageData>();
 
-            for (var index = 0; index < localizationData._data.Count; index++)
+            for (var index = 0; index < a._data.Count; index++)
             {
-                var languageData = localizationData._data[index];
+                var languageData = a._data[index];
 
                 languageData += b;
                 
-                localizationData._data[index] = languageData;
+                localizations.Add(languageData);
             }
 
-            return localizationData;
+            return new LocalizationData(a._localizationCode, localizations);
         }
     }
 
