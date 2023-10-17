@@ -1,5 +1,5 @@
 # Localization Unity Tools
- These are tools for creating localization, in the Unity engine.
+ Tools for creating localization in Unity
 
 This is a localization tool created for the Unity engine.
 
