@@ -77,7 +77,17 @@ namespace Core.Scripts.Localizations
         }
 
         public static Language GetCurrentLanguage() => _currentLanguage;
-
+        
+        public static int GetCurrentLanguageIndex()
+        {
+            for (var index = 0; index < _languages.Length; index++)
+            {
+                if (_languages[index] == _currentLanguage) return index;
+            }
+            
+            return -1;
+        }
+        
         public static Language GetLanguageByCode(string code)
         {
             for (var index = 0; index < _languages.Length; index++)
