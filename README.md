@@ -1,17 +1,32 @@
+❌ **OBSOLETE! DO NOT USE.**  
+✅ **USE:** [DGG Localization](https://github.com/DaniilDGG/DGG-Localization)
+
 # Localization Unity Tools
- Tools for creating localization in Unity
 
-This is a localization tool created for the Unity engine.
+Tools for managing localization in Unity.
 
-# How to use
+This tool simplifies the process of adding localization support to Unity projects.
 
-To get started with this localization tool, you must set up the languages using the Localization/Language settings window.
-Next, add the localizations you need using the Localization/Localization Settings window, where you will need to first come up with a unique identifier for the localization item, and then set localizations for all the selected languages.
+## Getting Started
 
-After that, you can use the LocalizationInfo component, which receives localizations. Besides it, there is already a ready-made TMPTextLocalization that localizes text. To do this, you just need to enter a unique localization identifier.
+1. **Set Up Languages**  
+   Open the `Localization/Language Settings` window to configure the languages for your project.
 
-To get the system working, you must call InitLocalizationSystem() on the ScriptableObject LocalizationProfile. Example: Demo Scene.
+2. **Add Localizations**  
+   Use the `Localization/Localization Settings` window to create and manage localization items.  
+   - Start by creating a unique identifier for each localization item.  
+   - Provide translations for all configured languages.
 
-Also, to change the current language - use LocalizationController.SwitchLanguage(int language number, from 0) Example: Demo Scene.
+3. **Use Localizations in Your Project**  
+   - Add the `LocalizationInfo` component to manage localization data.  
+   - For text localization, use the `TMPTextLocalization` component.  
+     - Simply input the unique localization identifier for the desired text.
 
-Also, the tool supports XLSX import and export, for editing localizations outside the Unity editor.
+4. **Initialize the System**  
+   Call `InitLocalizationSystem()` on the `LocalizationProfile` ScriptableObject to activate the localization system.  
+   **Example**: Refer to the Demo Scene for implementation details.
+
+5. **Switch Languages**  
+   To change the current language, use:  
+   ```csharp
+   LocalizationController.SwitchLanguage(int languageIndex);
